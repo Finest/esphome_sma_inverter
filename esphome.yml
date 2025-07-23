@@ -10,7 +10,7 @@ esphome:
 esp32:
   board: esp32dev
   framework:
-    type: arduino
+    type: esp-idf
 
 logger:
   level: INFO
@@ -34,18 +34,78 @@ external_components:
 
 sensor:
   - platform: smabluetooth_solar
-    name: "${friendly_name} PV Power"
-    sma_inverter_bluetooth_mac: !secret sma_inverter_mac
-    sma_inverter_password: !secret sma_inverter_password
     update_interval: 60s
+    sma_inverter_bluetooth_mac: "00:80:25:09:4A:25"
+    sma_inverter_password: "0000"
+    sma_inverter_delay_values: 800ms
 
-  - platform: smabluetooth_solar
-    name: "${friendly_name} Grid Power"
-    type: grid_power
-    update_interval: 60s
+    inverter_status: 
+      name: "Inverter Status"
 
-  - platform: smabluetooth_solar
-    name: "${friendly_name} Yield Today"
-    type: daily_yield
-    unit_of_measurement: "Wh"
-    update_interval: 300s
+    grid_relay: 
+      name: "Grid relay Status"
+
+    phase_a:
+      voltage:
+          name: "Voltage Phase A"
+      current:
+          name: "Current Phase A"
+      active_power:
+          name: "Power Phase A"
+    phase_b:
+      voltage:
+          name: "Voltage Phase B"
+      current:
+          name: "Current Phase B"
+      active_power:
+          name: "Power Phase B"
+    phase_c:
+      voltage:
+          name: "Voltage Phase C"
+      current:
+          name: "Current Phase C"
+      active_power:
+          name: "Power Phase C"
+
+    pv1:
+      voltage:
+          name: "Voltage mppt1"
+      current:
+          name: "Current mppt1"
+      active_power:
+          name: "Power mppt1"
+
+    pv2:
+      voltage:
+          name: "Voltage mppt2"
+      current:
+          name: "Current mppt2"
+      active_power:
+          name: "Power mppt2"
+
+    frequency:
+      name: "Frequency"
+
+    energy_production_day:
+      name: "Today's Generation"
+
+    total_energy_production:
+      name: "Total Energy Production"
+
+    inverter_module_temp:
+      name: "Inverter Module Temp"
+
+    software_version:
+      name: "Software Version"
+
+    wakeup_time:
+      name: "Wakeup Time"
+
+    device_type:
+      name: "Device Type"
+
+    device_class:
+      name: "Device Class"
+
+    sma_inverter_bluetooth_signal_strength:
+      name: "Inverter Bluetooth Signal Strength"
