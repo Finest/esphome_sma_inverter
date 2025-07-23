@@ -1,0 +1,51 @@
+substitutions:
+  name: smablue-inverter
+  friendly_name: SMA Wechselrichter
+
+esphome:
+  name: ${name}
+  name_add_mac_suffix: false
+  friendly_name: ${friendly_name}
+
+esp32:
+  board: esp32dev
+  framework:
+    type: arduino
+
+logger:
+  level: INFO
+
+api:
+  encryption:
+    key: !secret api_encryption_key
+
+ota:
+  password: !secret ota_password
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+external_components:
+  - source:
+      type: git
+      url: TBD
+    components: [smabluetooth_solar]
+
+sensor:
+  - platform: smabluetooth_solar
+    name: "${friendly_name} PV Power"
+    sma_inverter_bluetooth_mac: !secret sma_inverter_mac
+    sma_inverter_password: !secret sma_inverter_password
+    update_interval: 60s
+
+  - platform: smabluetooth_solar
+    name: "${friendly_name} Grid Power"
+    type: grid_power
+    update_interval: 60s
+
+  - platform: smabluetooth_solar
+    name: "${friendly_name} Yield Today"
+    type: daily_yield
+    unit_of_measurement: "Wh"
+    update_interval: 300s

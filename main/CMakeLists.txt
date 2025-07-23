@@ -1,0 +1,1 @@
+idf_component_register(SRCS "app_main.c" "SMA_Inverter.cpp" "smabluetooth_solar.cpp" INCLUDE_DIRS ".")
