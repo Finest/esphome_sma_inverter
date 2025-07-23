@@ -29,7 +29,7 @@ wifi:
 external_components:
   - source:
       type: git
-      url: TBD
+      url: https://github.com/Finest/esphome_sma_inverter
     components: [smabluetooth_solar]
 
 sensor:
